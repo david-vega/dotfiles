@@ -1,8 +1,8 @@
 # dotFiles
 A simple way to configure your bash shell as developer [terminal][cli].  
-*by [Mario Zaizar](about)*
+*by David Vega Fork from Mario Zaizar*
 
-![editor screenshoot](http://github.com/mariozaizar/dotfiles/raw/master/images/prompt_complete.png)
+![editor screenshoot](https://lh3.googleusercontent.com/-wdjECGVkrgs/UVThP6l_2gI/AAAAAAAAC3k/i86N7dUcWeM/s574/Screen%2520Shot%25202013-03-28%2520at%25205.31.49%2520PM.jpg)
 
 ## Features
 
@@ -51,9 +51,6 @@ This is the current list of files:
     ~/Library/Application Support/Sublime Text 2/Packages/TestChooser/TestChooser.sublime-settings
 ```
 
-![rbenv screenshoot](http://github.com/mariozaizar/dotfiles/raw/master/images/prompt_simple.png)
-> The default prompt is pretty simple:
-
 ## Requirements
 
 - Mac OSX (Lion tested)
@@ -93,16 +90,6 @@ your original files.
 [Report issues!](https://github.com/mariozaizar/dotfiles/issues?labels=Bugs) and
 [suggest new features!](https://github.com/mariozaizar/dotfiles/issues?labels=Features)
 
-## About
-
-My name is [Mario Zaizar][about].  
-This is my [twitter][twitter] (en español).  
-
-### Thanks
-
-This project started as me grabbing scripts, mods and hacks to use better tools.
-Over the time I based my configurations on this awesome resources:
-
 [Ryan Bates dotFiles](https://github.com/ryanb/dotfiles), 
 [Git aliases](http://library.edgecase.com/git_immersion/lab_11.html), 
 Git prompt: [link1](http://tinyurl.com/4q6zehb), [link2](https://gist.github.com/778558), [link3](http://tinyurl.com/4kzgb7k), 
@@ -113,8 +100,6 @@ Git prompt: [link1](http://tinyurl.com/4q6zehb), [link2](https://gist.github.com
 [Mathias Bynens dotfiles](https://github.com/mathiasbynens/dotfiles/), 
 My [CrowdInt][crowd] friends
 
-[about]: http://about.me/mariozaizar
-[twitter]: http://twitter.com/mariozaizar
 [crowd]: http://blog.crowdint.com
 [cli]: http://en.wikipedia.org/wiki/Command_line_interface
 [git]: http://git-scm.com/
