@@ -20,55 +20,6 @@ export CLICOLOR=1;
 export LSCOLORS=ExFxCxDxBxegedabagacad;
 
 ################################################################################
-function ruby_version {
-  local version='';
-    if which rbenv > /dev/null; then
-      # rbenv installed
-      version="rbenv/$(rbenv_version)";
-    elif which rvm > /dev/null; then
-    # rvm installed
-    version="rvm/$(rvm_version)";
-  elif [ -f '.rbenv_version' ]; then
-    # rbenv_version detected
-    version="(.rbenv_version)";
-  elif [ -f '.rvmrc' ]; then
-    # rvmrc detected
-    version="(.rvmrc)";
-  else
-    version="(unknown ruby)";
-  fi
-  [ "$version=" != '' ] && echo "$version"
-}
-
-function rbenv_version {
-  echo "$(rbenv version | awk '{print $1}')"
-}
-
-function rvm_version {
-  local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
-  [ "$gemset" != "" ] && gemset="@$gemset"
-  local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
-  [ "$version" != "" ] && version="$version"
-  local full="$version$gemset"
-  [ "$full" != "" ] && echo "$full"
-}
-
-function vagrant_status {
-  local status=""
-
-  if [ -f 'Vagrantfile' ]; then
-    if which vagrant > /dev/null;  then
-      status="$(vagrant status | sed -n 3p)"
-      status="$(echo $status)"
-    else
-      status="not installed"
-    fi
-  else
-    status="NA"
-  fi
-
-  echo "$status"
-}
 
 # https://gist.github.com/778558
 __git_ps1 () {
@@ -78,38 +29,13 @@ __git_ps1 () {
     fi
 }
 
-function time_ago {
-  if [ -x $1 ]; then
-    echo "?"
-    exit;
-  fi
-
-  local now=`date +%s`;
-  local sec=$((now - $1));
-  local min=$((sec / 60));
-  local hrs=$((sec / 3600));
-  local day=$((sec / 86400));
-
-  local real_hrs=$((hrs % 24));
-  local real_min=$((min % 60));
-
-  if [ "$hrs" -gt 24 ]; then
-    time_ago="${day}d"
-  elif [ "$min" -gt 60 ]; then
-    time_ago="${hrs}h"
-  else
-    time_ago="${min}m"
-  fi
-  [ "$time_ago" != "" ] && echo "${time_ago}"
-}
-
 # http://tinyurl.com/4q6zehb, https://gist.github.com/778558
 function git_branch {
   if [ -n "$(__gitdir)" ]; then
     git_branch=`__git_ps1 "%s"`
-    echo "${git_branch}"
+    echo "[${git_branch}]"
   else
-    echo "NA"
+    echo ""
   fi
 }
 
@@ -119,7 +45,7 @@ function git_info {
 
     local last_commit=$(time_ago `git log --pretty=format:'%at' -1 2>/dev/null;`);
     local last_mine=$(time_ago `git mine --pretty=format:'%at' -1 2>/dev/null;`);
-    echo "${git_branch}: ${last_commit}/${last_mine}  ";
+    echo "${git_branch}: ${last_commit}/${last_mine}";
   fi
 }
 
@@ -137,17 +63,19 @@ function git_info {
 #  Gris Claro  0;37     Blanco        1;37
 
 if [ "$color_prompt" = yes ]; then
-  line1='\n\[\e[1;36m\]\@ \[\e[1;35m\]\w\[\e[1;37m\] at \[\e[1;36m\]\h'
-  line2='\n\[\e[1;36m\]git: \[\e[1;35m\]$(git_branch), \[\e[1;36m\]ruby: \[\e[1;30m\]$(ruby_version), \[\e[1;36m\]vagrant: \[\e[1;30m\]$(vagrant_status)\[\e[1;37m\]'
-  line3='\n\[\e[1;35m\]\W\[\e[1;37m\] → '
+  title='\e]0;\W :$(git config user.name)\a\n'
+  line1='\[\e[1;34m\]\u:\[\e[1;36m\]\w\[\e[1;37m\]'
+  line2='\[\e[1;33m\]$(git_branch)'
+  line3='\[\e[1;37m\]\$ \[\e[1;00m\]'
 
-  PS1="${line1}${line2}${line3}"
+  PS1="${title}${line1}${line2}${line3}"
 else
-  line1='\n\@ \w at \h'
-  line2='\ngit: $(git_branch), ruby: $(ruby_version), vagrant: $(vagrant_status)'
-  line3='\n\W → '
+  title='\e]0;\W :$(git config user.name)\a'
+  line1='\u:\w'
+  line2='$(git_branch)'
+  line3='\$ '
 
-  PS1="${line1}${line2}${line3}"
+  PS1="${title}${line1}${line2}${line3}"
 fi
 
 unset color_prompt
