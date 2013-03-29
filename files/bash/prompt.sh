@@ -29,6 +29,16 @@ __git_ps1 () {
     fi
 }
 
+# Thanks to @mohnish
+function git_dirty_status() {
+  local dirty_status=$(git status --porcelain 2>/dev/null| wc -l)
+  if test $dirty_status -gt 0; then
+    echo "⚑"
+  else
+    echo "⚐"
+  fi
+}
+
 # http://tinyurl.com/4q6zehb, https://gist.github.com/778558
 function git_branch {
   if [ -n "$(__gitdir)" ]; then
@@ -64,15 +74,15 @@ function git_info {
 
 if [ "$color_prompt" = yes ]; then
   title='\e]0;\W :$(git config user.name)\a\n'
-  line1='\[\e[1;34m\]\u:\[\e[1;36m\]\w\[\e[1;37m\]'
-  line2='\[\e[1;33m\]$(git_branch)'
+  line1='\[\e[1;34m\]\u:\[\e[1;36m\]\w'
+  line2='\[\e[1;33m\]$(git_branch)\[\e[1;31m\]$(git_dirty_status)'
   line3='\[\e[1;37m\]\$ \[\e[1;00m\]'
 
   PS1="${title}${line1}${line2}${line3}"
 else
   title='\e]0;\W :$(git config user.name)\a'
   line1='\u:\w'
-  line2='$(git_branch)'
+  line2='$(git_branch)$(git_dirty_status)'
   line3='\$ '
 
   PS1="${title}${line1}${line2}${line3}"
