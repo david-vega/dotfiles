@@ -2,7 +2,7 @@
 A simple way to configure your bash shell as developer [terminal][cli].  
 *by David Vega Fork from Mario Zaizar*
 
-![editor screenshoot](https://lh3.googleusercontent.com/-wdjECGVkrgs/UVThP6l_2gI/AAAAAAAAC3k/i86N7dUcWeM/s574/Screen%2520Shot%25202013-03-28%2520at%25205.31.49%2520PM.jpg)
+![editor screenshoot](https://www.evernote.com/shard/s292/sh/647c71e6-5521-4d95-a955-1bc7a019c90d/b5d6a907e156e0c59171a596895ed43d/res/fbf02629-5802-4630-a85b-2119f5e51db7/skitch.png?resizeSmall&width=832)
 
 ## Features
 
