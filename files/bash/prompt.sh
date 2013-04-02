@@ -23,19 +23,23 @@ export LSCOLORS=ExFxCxDxBxegedabagacad;
 
 # https://gist.github.com/778558
 __git_ps1 () {
-    local branch="$(git symbolic-ref HEAD 2>/dev/null)";
-    if [ -n "$branch" ]; then
-      printf "%s" "${branch##refs/heads/}";
-    fi
+  local branch="$(git symbolic-ref HEAD 2>/dev/null)";
+  if [ -n "$branch" ]; then
+    printf "%s" "${branch##refs/heads/}";
+  fi
 }
 
-# Thanks to @mohnish
+# Thanks to mohnish => twitter: @arrowgunz
 function git_dirty_status() {
-  local dirty_status=$(git status --porcelain 2>/dev/null| wc -l)
-  if test $dirty_status -gt 0; then
-    echo "⚑"
+  if [ -n "$(__gitdir)" ]; then
+    local dirty_status=$(git status --porcelain 2>/dev/null| wc -l)
+    if test $dirty_status -gt 0; then
+      echo "▶"
+    else
+      echo "▷"
+    fi
   else
-    echo "⚐"
+    ""
   fi
 }
 
@@ -75,7 +79,7 @@ function git_info {
 if [ "$color_prompt" = yes ]; then
   title='\e]0;\W :$(git config user.name)\a\n'
   line1='\[\e[1;34m\]\u:\[\e[1;36m\]\w'
-  line2='\[\e[1;33m\]$(git_branch)\[\e[1;31m\]$(git_dirty_status)'
+  line2='\[\e[1;33m\]$(git_branch)\[\e[0;35m\]$(git_dirty_status)'
   line3='\[\e[1;37m\]\$ \[\e[1;00m\]'
 
   PS1="${title}${line1}${line2}${line3}"
