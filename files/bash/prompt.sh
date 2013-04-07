@@ -39,7 +39,7 @@ function git_dirty_status() {
       echo "▷"
     fi
   else
-    ""
+    echo ""
   fi
 }
 
