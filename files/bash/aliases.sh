@@ -33,9 +33,14 @@ alias gd='git diff'
 alias go='git checkout '
 
 # Rails
+alias pryr='pry -r config/environment'
 alias r='rails'
 alias rails_log='tail -f ./log/development.log | grep --invert-match DEBUG'
 alias rails_test_log='tail -f ./log/test.log | grep --invert-match DEBUG'
+
++#assets
++alias coffeecompile='coffee --output public/javascripts/smartpay -cw public/coffeescripts/smartpay'
++alias sasscompile='sass --watch public/sass/:public/stylesheets --style compressed --line-comments'
 
 # Rails 2 & 3 functions
 # http://tinyurl.com/4j83zdv
@@ -65,7 +70,7 @@ sg () {
 }
 
 ss () {
-  if [ -f ./script/rails ]; then 
+  if [ -f ./script/rails ]; then
     rails s $@
   else
     ./script/server $@
