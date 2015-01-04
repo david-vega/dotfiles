@@ -1,9 +1,8 @@
 # Utils
 ###############################################################################
-alias work='clear; cd <%= @projects_dir %>;'
+alias work='clear; cd ~/projects;'
 ###############################################################################
 
-alias claer='clear;' # Nada puede malir sal
 alias cls='clear; ls;'
 alias create='touch'
 alias exot='exit'
@@ -13,16 +12,18 @@ alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -alF'
 alias reload='source ~/.bash_profile'
-alias s='subl -n .'
 
 # Ruby
 alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
-
+alias braca='bundle exec rake assets:compile:all'
 alias cuke="be cucumber -rfeatures -fprogress"
 alias pow_log='tail -f ~/Library/Logs/Pow/access.log'
 alias pow_restart='echo "Restarting pow..."; touch tmp/restart.txt'
+alias reboot_db_mg='bundle exec rake db:drop:all db:create:all db:migrate db:test:prepare'
+alias reboot_db_sl='bundle exec rake db:drop:all db:create:all db:schema:load db:test:prepare'
+alias run_specs='bundle exec rspec —-color --format Fivemat'
 
 # Git
 alias gs='git status '
@@ -33,14 +34,9 @@ alias gd='git diff'
 alias go='git checkout '
 
 # Rails
-alias pryr='pry -r config/environment'
 alias r='rails'
 alias rails_log='tail -f ./log/development.log | grep --invert-match DEBUG'
 alias rails_test_log='tail -f ./log/test.log | grep --invert-match DEBUG'
-
-+#assets
-+alias coffeecompile='coffee --output public/javascripts/smartpay -cw public/coffeescripts/smartpay'
-+alias sasscompile='sass --watch public/sass/:public/stylesheets --style compressed --line-comments'
 
 # Rails 2 & 3 functions
 # http://tinyurl.com/4j83zdv
